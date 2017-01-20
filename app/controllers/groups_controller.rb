@@ -3,7 +3,7 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
 before_action :check_group_and_permission, only: [:edit, :update, :destroy]
 
   def index
-    @groups = Group.all
+    @groups = Group.all.order("created_at DESC").paginate(page: params[:page], per_page: 4)
   end
 
   def new
